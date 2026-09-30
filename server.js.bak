@@ -1,0 +1,122 @@
+const express = require("express");
+const multer = require("multer");
+const nodemailer = require("nodemailer");
+const path = require("path");
+const fs = require("fs");
+const crypto = require("crypto");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const ADMIN_USER = process.env.ADMIN_USER || "";
+const ADMIN_PASS = process.env.ADMIN_PASS || "";
+const sessions = new Map();
+const upload = multer({
+  dest: path.join(__dirname, "uploads"),
+  limits: { fileSize: 8 * 1024 * 1024 }
+});
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 587),
+  secure: String(process.env.SMTP_SECURE || "false") === "true",
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+});
+
+app.use(express.urlencoded({ extended: false }));
+
+function authRequired(req, res, next) {
+  const token = req.headers.cookie?.match(/(?:^|;\s*)icom_session=([^;]+)/)?.[1];
+  if (!token || !sessions.has(token)) return res.redirect("/login.html");
+  req.user = sessions.get(token);
+  next();
+}
+
+app.get("/complaint.html", (req, res) => {
+  const token = req.headers.cookie?.match(/(?:^|;\s*)icom_session=([^;]+)/)?.[1];
+  if (!token || !sessions.has(token)) return res.redirect("/login.html");
+  res.sendFile(path.join(__dirname, "complaint.html"));
+});
+
+app.get("/api/auth/status", (req, res) => {
+  const token = req.headers.cookie?.match(/(?:^|;\s*)icom_session=([^;]+)/)?.[1];
+  res.json({ authenticated: !!(token && sessions.has(token)) });
+});
+
+app.post("/api/login", (req, res) => {
+  if (!ADMIN_USER || !ADMIN_PASS) return res.status(503).json({ ok:false, message:"Login credentials are not configured on the server." });
+  const { username, password } = req.body || {};
+  if (username !== ADMIN_USER || password !== ADMIN_PASS) return res.status(401).json({ ok:false, message:"Invalid username or password." });
+  const token = crypto.randomBytes(32).toString("hex");
+  sessions.set(token, { username, createdAt: Date.now() });
+  res.setHeader("Set-Cookie", `icom_session=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=28800${process.env.NODE_ENV === "production" ? "; Secure" : ""}`);
+  res.json({ ok:true });
+});
+
+app.post("/api/logout", (req, res) => {
+  const token = req.headers.cookie?.match(/(?:^|;\s*)icom_session=([^;]+)/)?.[1];
+  if (token) sessions.delete(token);
+  res.setHeader("Set-Cookie", "icom_session=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0");
+  res.json({ ok:true });
+});
+
+app.post("/api/complaints", authRequired, upload.single("machineImage"), async (req, res) => {
+  try {
+    const required = [
+      "branchName","branchCode","region","contactPerson","mobile",
+      "email","machine","address","complaint","additionalInfo","complaintNumber"
+    ];
+    for (const key of required) {
+      if (!req.body[key] || !String(req.body[key]).trim()) {
+        return res.status(400).send("Missing required field: " + key);
+      }
+    }
+    if (!req.file) return res.status(400).send("Machine image is required.");
+
+    const {
+      complaintNumber, branchName, branchCode, region, contactPerson,
+      mobile, email, machine, address, complaint, additionalInfo
+    } = req.body;
+
+    const text = `
+ICOM COUNT CUSTOMER COMPLAINT
+
+Complaint Number: ${complaintNumber}
+
+Branch Name: ${branchName}
+Branch Code: ${branchCode}
+Region: ${region}
+Contact Person: ${contactPerson}
+Mobile Number: ${mobile}
+Customer Email: ${email}
+Machine / Product: ${machine}
+
+Address:
+${address}
+
+Complaint Details:
+${complaint}
+
+Additional Information:
+${additionalInfo}
+`;
+
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM || process.env.SMTP_USER,
+      to: "icomcount@outlook.com",
+      replyTo: email,
+      subject: `ICOM COUNT Complaint ${complaintNumber} - ${machine}`,
+      text,
+      attachments: [{ filename: req.file.originalname || "machine-image", path: req.file.path }]
+    });
+
+    // Remove uploaded file after the email is accepted by SMTP.
+    fs.unlink(req.file.path, () => {});
+    res.json({ ok: true, complaintNumber });
+  } catch (err) {
+    console.error(err);
+    if (req.file) fs.unlink(req.file.path, () => {});
+    res.status(500).send("Unable to submit complaint.");
+  }
+});
+
+app.listen(PORT, () => console.log(`ICOM COUNT server running on port ${PORT}`));

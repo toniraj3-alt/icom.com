@@ -1,0 +1,22 @@
+ICOM COUNT COMPLAINT PORTAL - SECURITY HARDENING
+
+The complaint form is kept outside the public website folder and is sent only after successful server-side login.
+
+Included:
+- No public static complaint.html file.
+- Server-side authentication before /complaint.html is sent.
+- HttpOnly + SameSite=Strict session cookie.
+- 8-hour server-side session expiry.
+- Login rate limiting: 10 failed attempts per 10 minutes per IP.
+- No-cache headers on protected page and auth APIs.
+- Complaint images are stored in the server upload directory and are not publicly served.
+- Complaint numbers are generated on the server, not trusted from browser input.
+
+IMPORTANT:
+No browser website can be made 100% impossible to copy after an authorized user views it. This setup prevents unauthenticated direct access and protects the backend/data; it cannot prevent screenshots or copying by an authorized user.
+
+Production:
+- Set NODE_ENV=production to enable Secure session cookies.
+- Use HTTPS.
+- Configure COMPLAINT_PASSWORD_1 through COMPLAINT_PASSWORD_10 only as server environment variables.
+- Configure SMTP environment variables.

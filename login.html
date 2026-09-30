@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Complaint Login | ICOM COUNT</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef6ff;color:#172033}
+header{background:#0b1220;color:#fff;padding:14px 20px;position:sticky;top:0;z-index:5}.nav{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center}.logo img{height:54px;width:170px;object-fit:contain;border-radius:6px;background:#000}.nav a{color:#fff;text-decoration:none;margin-left:20px}
+.hero{background:linear-gradient(135deg,#0b1220,#123b62);color:#fff;padding:45px 20px}.hero-inner{max-width:1150px;margin:auto}.hero h1{margin:0 0 8px;font-size:40px}.hero p{margin:0;color:#dbe8f5}
+main{max-width:560px;margin:auto;padding:45px 20px}.card{background:#fff;border:1px solid #e7ebf0;border-radius:18px;padding:30px;box-shadow:0 8px 28px #13223812}.card h2{margin:0 0 8px}.sub{color:#697586;margin-bottom:24px}.notice{background:#eef8ff;border-left:4px solid #27c3ff;padding:13px 15px;border-radius:8px;margin-bottom:22px}label{display:block;font-weight:700;margin:15px 0 7px}input{width:100%;padding:13px;border:1px solid #ccd4df;border-radius:9px;font:inherit;background:#fff;color:#172033}button{width:100%;margin-top:22px;border:0;background:#27c3ff;color:#06111c;font-weight:800;padding:13px;border-radius:9px;cursor:pointer;font-size:16px}button:disabled{opacity:.6}#msg{display:none;margin-top:15px;padding:12px;border-radius:9px;background:#fff0f2;color:#a71932;border:1px solid #f2b7c0}.back{text-align:center;margin-top:20px}.back a{color:#087aa6;text-decoration:none;font-weight:700}footer{background:#070c15;color:#b8c1cc;text-align:center;padding:25px;margin-top:20px}
+@media(max-width:700px){.nav a{display:none}.hero h1{font-size:32px}}
+
+
+/* ICOM COUNT NEW LIGHT BLUE THEME */
+html,body{background:linear-gradient(135deg,#eef7ff 0%,#f8fbff 48%,#eaf4ff 100%);color:#172033;min-height:100%;}
+body{background-attachment:fixed;}
+header{background:linear-gradient(90deg,#071a33,#0d3b63);box-shadow:0 3px 18px rgba(7,26,51,.18);}
+.hero{background:linear-gradient(135deg,#071a33 0%,#0d3b63 55%,#11618a 100%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);}
+section{position:relative;}
+.card{background:rgba(255,255,255,.96);box-shadow:0 10px 30px rgba(30,80,120,.10);}
+.pic{background:linear-gradient(180deg,#ffffff,#f3f9ff);}
+.contact{background:linear-gradient(135deg,#0b2544,#0d4b70);box-shadow:0 12px 30px rgba(7,35,65,.16);}
+.offer-side{box-shadow:0 12px 35px rgba(20,70,110,.18);}
+</style></head><body>
+<header><div class="nav"><div class="logo"><img src="images/icom-count-header-logo.png" alt="ICOM COUNT"></div><nav><a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1>Customer Complaint Login</h1><p>Login first to access the ICOM COUNT customer complaint form.</p></div></div>
+<main><div class="card"><div class="notice"><strong>Authorized access:</strong> Username can be any name. Password must match one of the 10 passwords configured by ICOM COUNT.</div><h2>Complaint Portal</h2><div class="sub">After successful login, the complete complaint form will open.</div>
+<form id="login"><label>Username <span style="color:#d11">*</span></label><input name="username" autocomplete="username" placeholder="Enter your name / username" required><label>Password <span style="color:#d11">*</span></label><input name="password" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Enter authorized password" required><button id="btn" type="submit">Login & Continue</button></form><div id="msg"></div><div class="back"><a href="index.html">← Back to ICOM COUNT website</a></div></div></main>
+<footer>© 2026 ICOM COUNT • Complaint Support • icomcount@outlook.com</footer>
+<script>document.getElementById('login').addEventListener('submit',async e=>{e.preventDefault();const b=document.getElementById('btn'),m=document.getElementById('msg');b.disabled=true;b.textContent='Checking...';m.style.display='none';try{const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(e.target))});const d=await r.json();if(!r.ok)throw new Error(d.message||'Invalid username or password.');location.href='/complaint.html'}catch(x){m.textContent=x.message;m.style.display='block'}finally{b.disabled=false;b.textContent='Login & Continue'}});</script>
+</body></html>

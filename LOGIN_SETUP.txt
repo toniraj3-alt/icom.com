@@ -1,0 +1,25 @@
+ICOM COUNT COMPLAINT PORTAL LOGIN - MULTI PASSWORD MODE
+
+Login behavior:
+- Username: ANY non-empty username is accepted.
+- Password: only one of the 10 configured passwords is accepted.
+- Each configured password can be different.
+- A customer/staff member cannot login with an unconfigured password.
+- Passwords are checked on the server, not in the browser HTML.
+
+Configure these server environment variables before deployment:
+COMPLAINT_PASSWORD_1=your-secret-number-1
+COMPLAINT_PASSWORD_2=your-secret-number-2
+...
+COMPLAINT_PASSWORD_10=your-secret-number-10
+
+You can use values such as 1234, 6767, etc., but replace the example values with your private passwords before going live.
+
+Then run:
+npm install
+npm start
+
+Open /login.html. After successful login, the user is sent to /complaint.html.
+The session cookie is HttpOnly and expires after 8 hours. Logout is available on the complaint page.
+
+IMPORTANT: Do not put the real passwords into login.html or JavaScript. Keep them only in server environment variables.

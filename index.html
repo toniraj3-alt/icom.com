@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICOM COUNT | Note Counting Machines</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef6ff;color:#172033}
+header{background:#0b1220;color:#fff;padding:16px 20px;position:sticky;top:0;z-index:5}.nav{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center}.logo{font-size:26px;font-weight:800}.logo img{height:54px;width:150px;object-fit:contain;border-radius:6px;background:#000}.logo span{color:#27c3ff}nav a{color:#fff;text-decoration:none;margin-left:20px}
+.hero{background:linear-gradient(135deg,#0b1220,#123b62);color:#fff;padding:60px 20px}.hero-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}.hero h1{font-size:46px;margin:0 0 15px}.hero p{font-size:18px;line-height:1.6;color:#dbe8f5}.hero-img{width:100%;height:300px;object-fit:cover;background:#07101f;border-radius:20px;display:block}.brand-video{display:block;box-shadow:0 14px 40px #00000035}
+section{max-width:1150px;margin:auto;padding:50px 20px}.title{text-align:center;margin-bottom:28px}.title h2{font-size:32px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;border-radius:15px;overflow:hidden;border:1px solid #e7ebf0;box-shadow:0 7px 25px #13223812}.pic{height:235px;padding:10px}.pic img{width:100%;height:100%;object-fit:contain}.body{padding:18px}.body h3{margin:0 0 8px}.muted{color:#697586;font-size:13px}.price{font-weight:800;font-size:19px;margin:12px 0}.btn{display:inline-block;border:0;border-radius:9px;padding:12px 17px;margin:4px;text-decoration:none;font-weight:700;cursor:pointer}.primary{background:#27c3ff;color:#06111c}.soft{background:#eef5fa;color:#172033}.contact{background:#0b1220;color:#fff;border-radius:20px;padding:32px}.cart{position:fixed;right:18px;bottom:18px;background:#27c3ff;padding:14px 18px;border-radius:40px;font-weight:800;z-index:20}.offer-side{position:fixed;right:16px;top:165px;width:210px;background:#fff;border-radius:16px;box-shadow:0 10px 35px #13223835;overflow:hidden;z-index:19;border:1px solid #e7ebf0}.offer-side img{display:block;width:100%;height:auto}.offer-side .offer-btn{display:block;text-align:center;text-decoration:none;background:#0b1220;color:#fff;font-weight:800;padding:10px}.offer-close{position:absolute;right:6px;top:5px;width:26px;height:26px;border:0;border-radius:50%;background:#fff;font-weight:900;cursor:pointer}@media(max-width:800px){.offer-side{right:8px;top:auto;bottom:78px;width:165px}.cart{bottom:15px}}
+footer{background:#070c15;color:#b8c1cc;text-align:center;padding:25px}
+@media(max-width:800px){.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}nav{display:none}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero h1{font-size:34px}}
+
+
+/* ICOM COUNT NEW LIGHT BLUE THEME */
+html,body{background:linear-gradient(135deg,#eef7ff 0%,#f8fbff 48%,#eaf4ff 100%);color:#172033;min-height:100%;}
+body{background-attachment:fixed;}
+header{background:linear-gradient(90deg,#071a33,#0d3b63);box-shadow:0 3px 18px rgba(7,26,51,.18);}
+.hero{background:linear-gradient(135deg,#071a33 0%,#0d3b63 55%,#11618a 100%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);}
+section{position:relative;}
+.card{background:rgba(255,255,255,.96);box-shadow:0 10px 30px rgba(30,80,120,.10);}
+.pic{background:linear-gradient(180deg,#ffffff,#f3f9ff);}
+.contact{background:linear-gradient(135deg,#0b2544,#0d4b70);box-shadow:0 12px 30px rgba(7,35,65,.16);}
+.offer-side{box-shadow:0 12px 35px rgba(20,70,110,.18);}
+</style></head><body>
+<header><div class="nav"><div class="logo"><img src="images/icom-count-header-logo.png" alt="Icom Count brand logo"></div><nav><a href="#products">Products</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="login.html">Complaint</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><div><p style="color:#27c3ff;font-weight:800">ICOM COUNT • PROFESSIONAL SERIES</p><h1>Smart Note Counting Machines</h1><p>Professional solutions for counting, cash handling and currency value counting.</p><a class="btn primary" href="#products">Shop Products</a><a class="btn" style="background:#000;color:#fff" href="tel:+919470460958">Call 9470460958</a></div><video class="hero-img brand-video" autoplay muted loop playsinline preload="auto" poster="images/icom-count-brand-video-poster.jpg" aria-label="ICOM COUNT trusted brand animated video"><source src="images/icom-count-brand-video.mp4" type="video/mp4">Your browser does not support video playback.</video></div></div>
+
+<section id="products">
+<div class="title"><h2>Our Products</h2><p>Loose Note Counting Machines and Mix Value Note Counting Machines.</p></div>
+
+<h2 style="margin-top:35px">Loose Note Counting Machines</h2>
+<div class="grid" id="looseGrid"></div>
+
+<h2 style="margin-top:55px">Mix Value Note Counting Machines</h2>
+<div class="grid" id="mixGrid"></div>
+
+<h2 style="margin-top:55px">Godrej Bundle Note Counting Machines</h2>
+<div class="grid" id="bundleGrid"></div>
+
+<h2 style="margin-top:55px">Fake Note Detector Machines (UV Lamp)</h2>
+<div class="grid" id="fakeGrid"></div>
+
+<h2 style="margin-top:55px">Coin Counting Machine</h2>
+<div class="grid" id="coinGrid"></div>
+</section>
+
+<section id="about"><div class="title"><h2>Why Choose ICOM COUNT?</h2></div>
+<div class="grid">
+<div class="card"><div class="body"><h3>✓ 1 Year Warranty</h3><p class="muted">Warranty support on applicable products.</p></div></div>
+<div class="card"><div class="body"><h3>⚡ Fast Counting</h3><p class="muted">Efficient cash handling solutions.</p></div></div>
+<div class="card"><div class="body"><h3>💰 Value Counting</h3><p class="muted">Mix Value models can count mixed denominations by value.</p></div></div>
+</div></section>
+
+<section id="contact"><div class="contact"><h2>Need Help?</h2><p>Call or WhatsApp ICOM COUNT for product details, pricing and orders.</p>
+<a class="btn primary" href="https://wa.me/919470460958">WhatsApp</a><a class="btn" style="background:#000;color:#fff" href="tel:+919470460958">Call Now</a></div></section>
+<div class="offer-side" id="offerSide"><button class="offer-close" onclick="document.getElementById('offerSide').style.display='none'">×</button><img src="images/offer-30-percent.gif" alt="30% discount offer"><a class="offer-btn" href="#products">SHOP OFFER</a></div>
+<footer>© 2026 ICOM COUNT • Icomcount.com • 9470460958</footer>
+
+<script>
+const loose=[1,2,3,4,5,6].map(i=>({
+ name:"Loose Note Counting Machine "+i,
+ img:"images/loose-note-counter-"+i+".jpg"
+}));
+const mix=[
+ {name:"Mix Value Note Counting Machine 01",img:"images/mix-value-note-counter-1.jpg"},
+ {name:"Mix Value Note Counting Machine 02",img:"images/mix-value-note-counter-2.jpg"},
+ {name:"Mix Value Note Counting Machine 03",img:"images/mix-value-note-counter-3.jpg"},
+];
+function cards(list){
+ return list.map(p=>`<article class="card"><div class="pic"><img src="${p.img}" alt="${p.name}"></div><div class="body"><h3>${p.name}</h3><div class="muted">ICOM COUNT</div><div class="price">Price on Request</div><button class="btn primary" onclick="buyNow(p.name)">Buy Now</button><a class="btn soft" href="https://wa.me/919470460958?text=I%20am%20interested%20in%20${encodeURIComponent(p.name)}">WhatsApp</a></div></article>`).join('');
+}
+document.getElementById('looseGrid').innerHTML=cards(loose);
+document.getElementById('mixGrid').innerHTML=cards(mix);
+
+const bundle=[
+ {name:"Godrej Bundle Note Counting Machine 01",img:"images/godrej-bundle-counter-1.jpg"},
+ {name:"Godrej Bundle Note Counting Machine 02",img:"images/godrej-bundle-counter-2.jpg"},
+ {name:"Bundle Note Counting Machine 03",img:"images/godrej-bundle-counter-3.jpg"}
+];
+document.getElementById('bundleGrid').innerHTML=cards(bundle);
+
+const fake=[
+ {name:"Fake Note Detector Machine (UV Lamp) 01",img:"images/fake-note-detector-uv-1.jpg"},
+ {name:"Fake Note Detector Machine (UV Lamp) 02",img:"images/fake-note-detector-uv-2.jpg"},
+ {name:"Fake Note Detector Machine (UV Lamp) 03",img:"images/fake-note-detector-uv-3.jpg"}
+];
+document.getElementById('fakeGrid').innerHTML=cards(fake);
+
+
+const coin=[
+ {name:"Coin Counting Machine",img:"images/coin-counting-machine.webp"}
+];
+document.getElementById('coinGrid').innerHTML=cards(coin);
+function buyNow(productName){
+  const phone='919470460958';
+  const msg='I want to buy '+productName+' from ICOM COUNT website.';
+  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank');
+}
+</script></body></html>
